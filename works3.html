@@ -94,4 +94,13 @@
         <p>&copy; 2025 shirousagi misaki Portfolio</p>
     </footer>
 </body>
+
+    <script>
+    document.querySelectorAll(".work-image-placeholder img").forEach(img => {
+        img.addEventListener("click", () => {
+        window.open(img.src, "_blank"); // 画像URLを別タブで開く
+        });
+    });
+    </script>
+    
 </html>
