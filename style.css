@@ -668,40 +668,32 @@ footer {
         padding-top: 80px;
     }
     
-    .carousel-track {
-        /* モバイルでは幅を自動にし、コンテンツに応じて伸びるようにする */
-        width: auto;
-    }
-    
-    .carousel-item {
-        /* モバイルでのアイテム幅 */
-        width: 180px; 
-        scroll-snap-align: center; /* アイテムが中央にピタッと止まるように設定 */
-    }
 
+/* 💡 モバイル用のアニメーション移動距離を定義 */
+    /* アイテム幅 (180px) + 隙間 (20px) = 200px */
+    /* 8アイテム * 200px = 1600px (移動距離) */
     @keyframes scroll-left-mobile {
         from {
             transform: translateX(0);
         }
         to {
-            /* モバイルアイテムの合計幅 (1600px) だけ移動 */
+            /* モバイルアイテム1セット分(8個)の合計幅だけ移動 */
             transform: translateX(-1600px); 
         }
     }
     
     .carousel-track {
-        /* 1. width: auto; のまま、アニメーションだけ上書き */
-        /* 2. スワイプと自動再生が競合しないように、scroll-snap-typeを停止 */
+        /* スワイプと自動再生が競合しないように、scroll-snap-typeを停止 */
         scroll-snap-type: none;
         
-        /* 3. モバイル専用のアニメーションを適用し直す */
-        animation: scroll-left-mobile 30s linear infinite; /* 30sはPCと同一でOK */
+        /* モバイル専用のアニメーションを適用 */
+        animation: scroll-left-mobile 30s linear infinite; 
     }
     
     .carousel-item {
         /* モバイルでのアイテム幅 */
         width: 180px; 
-        /* 💡 追記: スナップを停止 */
+        /* スナップを停止 */
         scroll-snap-align: none; 
     }
 
