@@ -302,9 +302,8 @@ main {
 /* ===================================== */
 
 :root {
-    /* ... 既存の変数 ... */
-    --carousel-item-total-width: 2160px; /* 8アイテム * (250px + 20px) = 2160px */
-    /* 最後に残る20pxのmargin-rightは無視してOK */
+    /* PCアイテム: 8個 * (250px + 20px) = 2160px */
+    --carousel-item-total-width: 2160px; 
 }
 
 .profile-carousel-container {
