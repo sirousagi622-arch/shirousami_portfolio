@@ -308,20 +308,14 @@ main {
 }
 
 .profile-carousel-container {
-    /* 画面からはみ出るコンテンツを隠す（横スクロールバーは表示させない） */
     overflow-x: hidden;
     overflow-y: visible;
     margin-top: 50px;
-    padding: 0 20px; /* 左右に少しパディングを持たせて見やすくする */
+    padding: 0 20px; 
 }
 
 .carousel-track {
     display: flex;
-    /* ❌ 削除: width: 200%; */
-    
-    /* 💡 修正点: `flex-basis`が設定されているのでwidthは削除し、
-               アニメーションでトラックの長さを補う */
-               
     animation: scroll-left 40s linear infinite; 
     padding-bottom: 20px;
 }
@@ -351,8 +345,6 @@ main {
         transform: translateX(0);
     }
     to {
-        /* 💡 修正点: トラックの幅の50%ではなく、複製前のリストの合計幅だけ移動させる */
-        /* これが、複製されたコンテンツと完全に一致する距離となる */
         transform: translateX(calc(-1 * var(--carousel-item-total-width))); 
     }
 }
@@ -557,7 +549,8 @@ main {
   cursor: pointer;
 }
 
-.linestamp {
+.linestamp img{
+    width: 100%;
     text-align: center;
 }
 
@@ -675,26 +668,42 @@ footer {
     .profile-section h3 {
         padding-top: 80px;
     }
-
-    .profile-carousel-container {
-        /* モバイルではスクロール可能にする (CSSスナップでスムーズな操作性) */
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory; 
-        padding: 0 10px;
-    }
     
     .carousel-track {
         /* モバイルでは幅を自動にし、コンテンツに応じて伸びるようにする */
         width: auto;
-        /* 💡 追記: モバイルでは自動アニメーションを停止 */
-        animation-play-state: paused;
-        /* または animation: none; で完全にアニメーションを削除 */
     }
     
     .carousel-item {
         /* モバイルでのアイテム幅 */
         width: 180px; 
         scroll-snap-align: center; /* アイテムが中央にピタッと止まるように設定 */
+    }
+
+    @keyframes scroll-left-mobile {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            /* モバイルアイテムの合計幅 (1600px) だけ移動 */
+            transform: translateX(-1600px); 
+        }
+    }
+    
+    .carousel-track {
+        /* 1. width: auto; のまま、アニメーションだけ上書き */
+        /* 2. スワイプと自動再生が競合しないように、scroll-snap-typeを停止 */
+        scroll-snap-type: none;
+        
+        /* 3. モバイル専用のアニメーションを適用し直す */
+        animation: scroll-left-mobile 30s linear infinite; /* 30sはPCと同一でOK */
+    }
+    
+    .carousel-item {
+        /* モバイルでのアイテム幅 */
+        width: 180px; 
+        /* 💡 追記: スナップを停止 */
+        scroll-snap-align: none; 
     }
 
     /* Worksセクションのモバイル表示 */
@@ -767,5 +776,4 @@ footer {
     .work-item {
         width: 100%;
     }
-
 }
