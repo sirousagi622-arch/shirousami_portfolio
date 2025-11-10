@@ -66,10 +66,11 @@ h2, h3, h4 {
     height: 100%;
 }
 
-.logo {
-    font-size: 1.5em;
-    color: var(--color-main-dark);
+.logo img {
+    height: 70px;
 }
+
+
 
 .fixed-header nav ul {
     display: flex;
@@ -120,6 +121,49 @@ main {
 
 .section:last-child {
     border-bottom: none;
+}
+
+/* ===================================== */
+/* 💡 TOPに戻るボタンのスタイル */
+/* ===================================== */
+#scroll-to-top-btn {
+    /* 画面に固定表示 */
+    position: fixed;
+    /* 右下からの位置調整 */
+    right: 20px; 
+    bottom: 20px;
+    /* 他の要素より手前に表示 */
+    z-index: 999; 
+    
+    /* ボタンのサイズ設定 */
+    width: 80px; /* PCでのサイズ (適宜調整) */
+    height: auto;
+    
+    /* ホバー時の見た目（動き） */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#scroll-to-top-btn img {
+    /* 画像をボタンの枠いっぱいに広げる */
+    width: 100%;
+    height: auto;
+    display: block;
+    /* 丸みを帯びたデザインに合わせて影を調整 */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2)); 
+}
+
+/* ホバー時のアニメーション（少し浮き上がらせる） */
+#scroll-to-top-btn:hover {
+    transform: translateY(-5px);
+}
+
+/* モバイル対応の調整 */
+@media (max-width: 768px) {
+    #scroll-to-top-btn {
+        right: 15px;
+        bottom: 15px;
+        width: 60px; /* モバイルでは少し小さく */
+    }
 }
 
 /* ------------------------------------------- */
@@ -206,7 +250,6 @@ main {
 }
 .profile-section img {
     text-align: center;
-    width: 50%;
 }
 
 .profile-detail {
@@ -244,7 +287,7 @@ main {
     color: var(--color-main-dark);
 }
 
-.profile-detail img {
+.profile-img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -252,6 +295,66 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     object-fit: cover;
     background-color: var(--color-white); 
+}
+
+/* ===================================== */
+/* 💡 Profile カルーセルの基本設定 */
+/* ===================================== */
+
+:root {
+    /* ... 既存の変数 ... */
+    --carousel-item-total-width: 2160px; /* 8アイテム * (250px + 20px) = 2160px */
+    /* 最後に残る20pxのmargin-rightは無視してOK */
+}
+
+.profile-carousel-container {
+    /* 画面からはみ出るコンテンツを隠す（横スクロールバーは表示させない） */
+    overflow-x: hidden;
+    overflow-y: visible;
+    margin-top: 50px;
+    padding: 0 20px; /* 左右に少しパディングを持たせて見やすくする */
+}
+
+.carousel-track {
+    display: flex;
+    /* ❌ 削除: width: 200%; */
+    
+    /* 💡 修正点: `flex-basis`が設定されているのでwidthは削除し、
+               アニメーションでトラックの長さを補う */
+               
+    animation: scroll-left 50s linear infinite; 
+    padding-bottom: 20px;
+}
+
+.carousel-item {
+    /* 各アイテムの幅と隙間を設定 */
+    flex: 0 0 auto; /* アイテムが縮まないように設定 */
+    width: 250px; /* アイテムの固定幅 (適宜調整) */
+    margin-right: 20px; /* アイテム間の隙間 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    /* 画像をアイテムの枠いっぱいに広げる */
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 💡 無限に左へスクロールするアニメーションを定義 */
+/* 💡 修正後: @keyframes scroll-left */
+@keyframes scroll-left {
+    from {
+        /* 開始：元の位置 */
+        transform: translateX(0);
+    }
+    to {
+        /* 💡 修正点: トラックの幅の50%ではなく、複製前のリストの合計幅だけ移動させる */
+        /* これが、複製されたコンテンツと完全に一致する距離となる */
+        transform: translateX(calc(-1 * var(--carousel-item-total-width))); 
+    }
 }
 
 /* Worksボタン*/
@@ -454,6 +557,10 @@ main {
   cursor: pointer;
 }
 
+.linestamp {
+    text-align: center;
+}
+
 
 /* ------------------------------------------- */
 /* Contactセクション */
@@ -512,14 +619,14 @@ footer {
 
 
 /* ------------------------------------------- */
-/* レスポンシブ対応の最小限の調整 (768px以下) */
+/* レスポンシブ対応 (768px以下) */
 /* ------------------------------------------- */
 @media (max-width: 768px) {
 /* 既存のレスポンシブヘッダーのスタイル */
     .fixed-header .header-content {
         flex-direction: column;
         height: auto;
-        padding: 10px 20px;
+        padding: 1px 20px;
     }
     
     .fixed-header {
@@ -529,6 +636,10 @@ footer {
     .fixed-header nav ul {
         margin-top: 5px;
         justify-content: center;
+    }
+
+    .logo img {
+        height: 50px;
     }
 
     /* PC版のホバー効果を打ち消す（タッチデバイス向け） */
@@ -563,6 +674,27 @@ footer {
     /* profile */
     .profile-section h3 {
         padding-top: 80px;
+    }
+
+    .profile-carousel-container {
+        /* モバイルではスクロール可能にする (CSSスナップでスムーズな操作性) */
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory; 
+        padding: 0 10px;
+    }
+    
+    .carousel-track {
+        /* モバイルでは幅を自動にし、コンテンツに応じて伸びるようにする */
+        width: auto;
+        /* 💡 追記: モバイルでは自動アニメーションを停止 */
+        animation-play-state: paused;
+        /* または animation: none; で完全にアニメーションを削除 */
+    }
+    
+    .carousel-item {
+        /* モバイルでのアイテム幅 */
+        width: 180px; 
+        scroll-snap-align: center; /* アイテムが中央にピタッと止まるように設定 */
     }
 
     /* Worksセクションのモバイル表示 */
