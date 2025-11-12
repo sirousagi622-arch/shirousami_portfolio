@@ -523,6 +523,9 @@ main {
     height: 100%;
     object-fit: contain;
     display: block;
+    border: 1px solid var(--color-accent-light);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 /* 動画 */
@@ -532,6 +535,7 @@ main {
     padding-top: 56.25%; /* 9 / 16 * 100 = 56.25 */ 
     border-radius: 3px;
     overflow: hidden;
+    
 }
 
 /* <iframe> 要素をコンテナ内に絶対配置し、コンテナサイズに合わせる */
