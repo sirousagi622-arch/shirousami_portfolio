@@ -175,7 +175,7 @@ main {
     align-items: center;
     text-align: center;
     height: 80vh;
-    padding: 0 50px 20px 100px;
+    padding: 0 0 20px 100px;
     border-radius: 10px;
     background-image: url(images/top.png);
     background-repeat: no-repeat;
@@ -203,6 +203,10 @@ main {
     margin: 0.1em 0;
     background-color: rgba(255, 255, 255, 0.7);
     font-family: "Pacifico", cursive;
+}
+
+.welcome-text img {
+    width: 250px;
 }
 
 .profile-image-container img {
@@ -315,7 +319,7 @@ main {
 
 .carousel-track {
     display: flex;
-    animation: scroll-left 40s linear infinite; 
+    animation: scroll-left 50s linear infinite; 
     padding-bottom: 20px;
 }
 
@@ -523,6 +527,9 @@ main {
     height: 100%;
     object-fit: contain;
     display: block;
+    border: 1px solid var(--color-accent-light);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 /* 動画 */
@@ -532,6 +539,7 @@ main {
     padding-top: 56.25%; /* 9 / 16 * 100 = 56.25 */ 
     border-radius: 3px;
     overflow: hidden;
+    
 }
 
 /* <iframe> 要素をコンテナ内に絶対配置し、コンテナサイズに合わせる */
@@ -548,9 +556,12 @@ main {
   cursor: pointer;
 }
 
-.linestamp img{
-    width: 100%;
+.linestamp {
     text-align: center;
+}
+
+.linestamp img{
+    width: 60%;
 }
 
 
@@ -571,6 +582,7 @@ main {
     background-repeat: no-repeat;
     background-position: center;
 }
+
 
 .contact-section h3 {
     font-size: 2em;
@@ -609,6 +621,25 @@ main {
 .contact-info-placeholder {
     margin-bottom: 20px;
 }
+
+/* ===================================== */
+/* 💡 Contactセクションのメールリンクスタイル */
+/* ===================================== */
+.contact-email-link {
+    text-decoration: none; 
+    color: inherit; 
+    /* ホバー時の変化を打ち消したい場合は以下を追加 */
+    /* color: var(--color-main-dark); */ 
+}
+
+.contact-info-placeholder {
+    display: inline-block; 
+}
+
+.contact-email-link:hover {
+    background-color: var(--color-main-dark);
+}
+
 
 /* フッター */
 footer {
@@ -677,6 +708,11 @@ footer {
     .profile-section h3 {
         padding-top: 80px;
     }
+
+
+.linestamp img{
+    width: 100%;
+}
     
 
 /* 💡 モバイル用のアニメーション移動距離を定義 */
@@ -697,7 +733,7 @@ footer {
         scroll-snap-type: none;
         
         /* モバイル専用のアニメーションを適用 */
-        animation: scroll-left-mobile 30s linear infinite; 
+        animation: scroll-left-mobile 50s linear infinite; 
     }
     
     .carousel-item {
