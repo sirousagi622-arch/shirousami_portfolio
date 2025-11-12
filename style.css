@@ -315,7 +315,7 @@ main {
 
 .carousel-track {
     display: flex;
-    animation: scroll-left 40s linear infinite; 
+    animation: scroll-left 50s linear infinite; 
     padding-bottom: 20px;
 }
 
@@ -548,9 +548,12 @@ main {
   cursor: pointer;
 }
 
-.linestamp img{
-    width: 100%;
+.linestamp {
     text-align: center;
+}
+
+.linestamp img{
+    width: 60%;
 }
 
 
@@ -598,6 +601,29 @@ main {
 
 .contact-info-placeholder {
     margin-bottom: 20px;
+}
+
+/* ===================================== */
+/* 💡 Contactセクションのメールリンクスタイル */
+/* ===================================== */
+.contact-email-link {
+    /* リンクの下線を非表示にする */
+    text-decoration: none; 
+    /* リンクの色を親要素の文字色に戻す */
+    color: inherit; 
+    /* ホバー時の変化を打ち消したい場合は以下を追加 */
+    /* color: var(--color-main-dark); */ 
+}
+
+/* リンクを囲んでいる<div>全体がクリック対象になるように設定 */
+.contact-info-placeholder {
+    /* <a>タグがブロック要素として振る舞うように設定 */
+    display: inline-block; 
+}
+
+/* <a>タグの子要素である<p>タグのスタイルを維持 */
+.contact-email-link p {
+    margin: 0; /* <p>タグのデフォルトマージンをリセット */
 }
 
 /* フッター */
@@ -667,6 +693,11 @@ footer {
     .profile-section h3 {
         padding-top: 80px;
     }
+
+
+.linestamp img{
+    width: 100%;
+}
     
 
 /* 💡 モバイル用のアニメーション移動距離を定義 */
@@ -687,7 +718,7 @@ footer {
         scroll-snap-type: none;
         
         /* モバイル専用のアニメーションを適用 */
-        animation: scroll-left-mobile 30s linear infinite; 
+        animation: scroll-left-mobile 50s linear infinite; 
     }
     
     .carousel-item {
